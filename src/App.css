@@ -1,4 +1,4 @@
-/* html, body, #root {
+html, body, #root {
     font: 0.9rem sans-serif;
     background: #0a1f44;
     color: #1e2432;
@@ -90,4 +90,4 @@ p {
     .city {
         padding: 40px 20%;
     }
-} */
+}
