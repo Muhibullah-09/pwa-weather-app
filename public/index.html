@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Modern PWA Weather React Application " />
   <link rel="apple-touch-icon" href="./images/weather.jpg" />
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
   <title>Weather App</title>
 </head>
 
@@ -18,8 +18,9 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('')
-          .then
+        navigator.serviceWorker.register('./serviceworker.js')
+          .then((reg) => console.log('Success', reg.scope))
+          .catch((err) => console.log('Failure: ', err));
       })
     }
   </script>
