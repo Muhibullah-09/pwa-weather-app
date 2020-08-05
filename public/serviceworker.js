@@ -23,7 +23,7 @@ self.addEventListener('install', (event) => {
 // Listen for requests
 self.addEventListener('fetch', (event) => {
     event.respondWith(
-        caches.match(event.request)
+        caches.match(event.request)//here request means EX: you need to see a image you send request
             .then(() => {
                 return fetch(event.request)
                     .catch(() => caches.match('offline.html'))
@@ -31,19 +31,19 @@ self.addEventListener('fetch', (event) => {
     )
 });
 
-// // Activate the SW
-// self.addEventListener('activate', (event) => {
-//     const cacheWhitelist = [];
-//     cacheWhitelist.push(CACHE_NAME);
+// Activate the SW
+self.addEventListener('activate', (event) => {
+    const cacheWhitelist = [];
+    cacheWhitelist.push(CACHE_NAME);
 
-//     event.waitUntil(
-//         caches.keys().then((cacheNames) => Promise.all(
-//             cacheNames.map((cacheName) => {
-//                 if (!cacheWhitelist.includes(cacheName)) {
-//                     return caches.delete(cacheName);
-//                 }
-//             })
-//         ))
+    event.waitUntil(
+        caches.keys().then((cacheNames) => Promise.all(
+            cacheNames.map((cacheName) => {
+                if (!cacheWhitelist.includes(cacheName)) {//if cacheWhitelist does not include a cacheName then return
+                    return caches.delete(cacheName);
+                }
+            })
+        ))
 
-//     )
-// });
+    )
+});
