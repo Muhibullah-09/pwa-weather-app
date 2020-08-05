@@ -1,30 +1,35 @@
-// const CACHE_NAME = "version-1";
-// const urlsToCache = ['index.html', 'offline.html'];
+//cache stands for storage of the browser if we load something once 
+// if we make a request for example if you load a image you dont have to load a image every time 
+//when you go online you just take it from the cache 'its faster and more effecctive'.
+const CACHE_NAME = "version-1";
 
-// const self = this;
+//here offline.html is used when we offline
+const urlsToCache = ['index.html', 'offline.html'];
 
-// // Install SW
-// self.addEventListener('install', (event) => {
-//     event.waitUntil(
-//         caches.open(CACHE_NAME)
-//             .then((cache) => {
-//                 console.log('Opened cache');
+const self = this;
 
-//                 return cache.addAll(urlsToCache);
-//             })
-//     )
-// });
+// Install SW
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then((cache) => {
+                console.log('Opened cache');
 
-// // Listen for requests
-// self.addEventListener('fetch', (event) => {
-//     event.respondWith(
-//         caches.match(event.request)
-//             .then(() => {
-//                 return fetch(event.request)
-//                     .catch(() => caches.match('offline.html'))
-//             })
-//     )
-// });
+                return cache.addAll(urlsToCache);
+            })
+    )
+});
+
+// Listen for requests
+self.addEventListener('fetch', (event) => {
+    event.respondWith(
+        caches.match(event.request)
+            .then(() => {
+                return fetch(event.request)
+                    .catch(() => caches.match('offline.html'))
+            })
+    )
+});
 
 // // Activate the SW
 // self.addEventListener('activate', (event) => {
